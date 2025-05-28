@@ -98,8 +98,8 @@ class Base_Model(nn.Module):
             batch_size=self.hparams.batch_size,
             num_workers=self.hparams.num_workers,
             shuffle=True,
-            mode='train', 
-            strict_lr_hr_correlation=self.hparams.enf_corr
+            mode='train', drop_last = True,
+            strict_lr_hr_correlation=self.hparams.enf_corr, 
         )
 
         # [2] Inference 
@@ -375,7 +375,12 @@ class Base_Model(nn.Module):
 
 
         parser.add_argument('--enf_corr', action='store_true', help='Enforce LR-HR correlation?', default=False)
-        print(f'\n==[Warning]==\n: The total data length should be divisible via batch size {parser.parse_args().batch_size}\n\n')
+        print(
+            f"\n[W]\n"
+            f"Please ensure the database size is divisible by the batch size "
+            f"({parser.parse_args().batch_size}) so the model can find the optimal image pairs.\n"
+        )
+
         return parser
 
     # Mother function
