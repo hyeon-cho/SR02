@@ -16,6 +16,11 @@ import torch.nn.functional as F
 import time
 
 
+_WARNING_DOCS = f'[W] Please ensure the database size is divisible by the batch size, so the model can find the optimal image pairs.\n\n\
+[W] Using CLIP shows better qualitative results, so if VGG Baseline retrieval is not good enough, \
+try using CLIP by setting --use_clip True\n\n'
+
+
 class Base_Model(nn.Module):
     def __init__(self, hparams):
         super().__init__()
@@ -375,11 +380,7 @@ class Base_Model(nn.Module):
 
 
         parser.add_argument('--enf_corr', action='store_true', help='Enforce LR-HR correlation?', default=False)
-        print(
-            f"\n[W]\n"
-            f"Please ensure the database size is divisible by the batch size "
-            f"({parser.parse_args().batch_size}) so the model can find the optimal image pairs.\n"
-        )
+        print(_WARNING_DOCS)
 
         return parser
 
