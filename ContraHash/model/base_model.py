@@ -16,9 +16,9 @@ import torch.nn.functional as F
 import time
 
 
-_WARNING_DOCS = f'[W] Please ensure the database size is divisible by the batch size, so the model can find the optimal image pairs.\n\n\
+_WARNING_DOCS = f'[W] Please ensure the database size is divisible by the batch size, so the model can find the optimal image pairs.\n\
 [W] Using CLIP shows better qualitative results, so if VGG Baseline retrieval is not good enough, \
-try using CLIP by setting --use_clip True\n\n'
+try using CLIP by setting --use_clip True'
 
 
 class Base_Model(nn.Module):
@@ -38,7 +38,7 @@ class Base_Model(nn.Module):
         else: 
             self.save_root = self.save_root + f'_{time.time()}'
             self.save_root = self.save_root[:self.save_root.rfind('.')]
-            print(f'Results will be saved to {self.save_root}\n')
+            print(f'[A] Results will be saved to {self.save_root}\n')
             os.makedirs(self.save_root)
             os.makedirs(f'{self.save_root}/txt')
             os.makedirs(f'{self.save_root}/models')
