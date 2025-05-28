@@ -12,10 +12,10 @@ if __name__ == '__main__':
 
     if hparams.use_clip:
         from model.CLipIBHash import CLipIBHash
-        print('Using CLIP model for the encoder')
+        print(f'[A] Using CLIP model for the encoder')
         model = CLipIBHash(hparams)
     else:
-        print('Using baseline (VGG16) model for the encoder')
+        print(f'[A] Using baseline (VGG16) model for the encoder')
         model = CIBHash(hparams)
 
     device = torch.device('cuda')
