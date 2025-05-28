@@ -38,7 +38,7 @@ class Base_Model(nn.Module):
         else: 
             self.save_root = self.save_root + f'_{time.time()}'
             self.save_root = self.save_root[:self.save_root.rfind('.')]
-            print(f'Results will be saved to {self.save_root}')
+            print(f'Results will be saved to {self.save_root}\n')
             os.makedirs(self.save_root)
             os.makedirs(f'{self.save_root}/txt')
             os.makedirs(f'{self.save_root}/models')
@@ -90,6 +90,7 @@ class Base_Model(nn.Module):
 
         self.hparams.epochs = max(1, self.hparams.epochs)
 
+        logger.log(f'\n[Hyperparameters for run]')
         for hparam, val in vars(self.hparams).items():
             logger.log(f'{hparam}: {val}')
 
