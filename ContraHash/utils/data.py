@@ -35,7 +35,7 @@ class ImageFolderData:
             'test': _test_transforms
         }
 
-    def get_loader(self, batch_size, num_workers, shuffle=False, mode='train', img_dir=None, strict_lr_hr_correlation=False):
+    def get_loader(self, batch_size, num_workers, shuffle=False, mode='train', img_dir=None, strict_lr_hr_correlation=False, drop_last=False):
         """
         Strict LR-HR correlation: If True, the dataloader will return a pair of images
         (LR, HR) for each image in the dataset. If False, the dataloader will return only
@@ -49,7 +49,8 @@ class ImageFolderData:
         img_paths = sorted(glob.glob(os.path.join(img_dir, '*.png')))
         dataset = ListedDataset(img_paths, self.transforms[mode], mode, apply_downsample_transform)
         loader  = DataLoader(dataset=dataset, batch_size=batch_size,
-                             shuffle=shuffle, num_workers=num_workers)
+                             shuffle=shuffle, num_workers=num_workers, 
+                             drop_last=drop_last)
         return loader 
 
 
